@@ -31,3 +31,12 @@ basicNN <- ggplot(dataF,aes(y=SIMS,x=ARM))
 ```{r}
 basicNN + geom_point()  + geom_smooth(method=lm)
 ``` 
+
+```{r}
+basicNN <- ggplot(dataF,aes(y=SIMS,x=GRIP))
+```
+## Now add in scatterplot
+
+```{r}
+basicNN + geom_point()  + geom_smooth(method=lm)
+``` 
