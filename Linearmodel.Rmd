@@ -85,5 +85,6 @@ It's predicting 0.149,the 95% confidence interval is -2.132 and positive 2.431 .
 anova(model.1,model.3)
 ```
 All the model error for model.1 came up to 217.88,the residual sum of model.3 is 188.43,which has30 point less.There is a significance because we are testing weather or not our assessment .THE null hypothesis there isn't any difference how our model.1 explains and model.2 .Model.3 is doing  better job at predicting .In this particular anova test we conclude model.3 is the better model .
-### conclusion 
+
+### Conclusion 
 We conclude that model.3 is a better model than model.1 and model.2 ,the adjusted R squared of model.3 is 0.535 which is higher than the adjusted R squared of model.2 and model.2 .In the anova we concluded  the null hypothesis and the null hypothesis is there is no difference because one is nested in another .
