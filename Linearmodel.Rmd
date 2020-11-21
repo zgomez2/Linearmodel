@@ -26,12 +26,14 @@ require(knitr)
 ```{r}
 basicNN <- ggplot(dataF,aes(y=SIMS,x=ARM))
 ```
-## Now add in scatterplot
+## Now add in scatterplot 
+
 
 ```{r}
 basicNN + geom_point()  + geom_smooth(method=lm)
 ``` 
 
+The plot is a sum of squared error we check how far off some dots are from the blue line and we add them up .
 ```{r}
 basicNN <- ggplot(dataF,aes(y=SIMS,x=GRIP))
 ```
@@ -40,3 +42,48 @@ basicNN <- ggplot(dataF,aes(y=SIMS,x=GRIP))
 ```{r}
 basicNN + geom_point()  + geom_smooth(method=lm)
 ``` 
+
+The plot of SIMS v.s GRIP plus ARM is really what is would look like a plane in three dimensional space .
+```{r}
+model.1 <- lm(SIMS~ARM,data=dataF)
+summary.lm(model.1)
+```
+
+This particular model is explaining 47% of the variations more than the mean model did .This one explains more of the variations .The adjusted R squared for ARM is 0.467 which is higher value then GRIP The model.1 ARM is better than the model.2 GRIP.
+```{r}
+new <- data.frame(ARM=88,GRIP=94)
+                  predict.lm(model.1,new)
+predict(model.1,new,interval = "prediction")
+```      
+              
+It's predicting the value of 0.7063,but the interval the 95 % confidence interval is -1.726 and positive 3.138.
+```{r}
+model.2 <- lm(SIMS~GRIP,data=dataF)
+summary.lm(model.2)
+``` 
+The adjusted R squared for model.2 GRIP is of value of 0.405 which is lower then model .1 ARM.
+```{r}
+new <- data.frame(ARM=88,GRIP=94)
+                  predict.lm(model.2,new)
+predict(model.2,new,interval ="prediction")
+``` 
+
+It's predicting the value of -0.536 ,the 95% confidence interval is -3.107 and positive 2.035.
+```{r}
+model.3 <- lm(SIMS~GRIP+ARM,data=dataF)
+summary.lm(model.3)
+``` 
+Our adjusted R squared is 0.5853 that is bigger for the adjusted R squared than for model.1 and model.2.Model.3 explains more of the variations.Model.2 is the worst one .model.1 is the second best one and model.3 is the best model .Model.1 is nested in model.3 and model .2 as well.
+
+```{r}
+new <- data.frame(ARM=88,GRIP=94)
+                  predict.lm(model.3,new)
+predict(model.3,new,interval ="prediction")
+``` 
+It's predicting 0.149,the 95% confidence interval is -2.132 and positive 2.431 .
+```{r}
+anova(model.1,model.3)
+```
+All the model error for model.1 came up to 217.88,the residual sum of model.3 is 188.43,which has30 point less.There is a significance because we are testing weather or not our assessment .THE null hypothesis there isn't any difference how our model.1 explains and model.2 .Model.3 is doing  better job at predicting .In this particular anova test we conclude model.3 is the better model .
+### conclusion 
+We conclude that model.3 is a better model than model.1 and model.2 ,the adjusted R squared of model.3 is 0.535 which is higher than the adjusted R squared of model.2 and model.2 .In the anova we concluded  the null hypothesis and the null hypothesis is there is no difference because one is nested in another .
